@@ -1,0 +1,47 @@
+.messages{
+    display: flex;
+    justify-content: center;
+    .container{
+        width: 1200px;
+        padding: 30px 0px;
+
+        .title{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            
+        }
+        table{
+            width: 100%;
+            border: none;
+            tr{
+                height: 80px;
+               
+                th{
+                    text-align: left;
+                }
+                td{
+                    &:first-child{
+                        font-weight: bold;
+                    }
+                    &:nth-child(2), &:nth-child(3){
+                        color: rgb(108, 107, 107);
+                    }
+                    button{
+                        cursor: pointer;
+                        padding: 10px;
+                        background-color: green;
+                        color: white;
+                        border: none;
+                    }
+                }
+                
+                &.active{
+                    background-color: rgb(155, 155, 220);
+                    
+                }
+            }
+           
+        }
+    }
+}

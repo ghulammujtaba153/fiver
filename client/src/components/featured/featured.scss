@@ -1,0 +1,92 @@
+.featured{
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    background: #013914;
+    color: white;
+    
+
+    .container{
+        display: flex;
+        align-items: center;
+        width: 1200px;
+    margin: auto;
+        
+        
+
+        .left{
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            
+
+            h1{
+                font-size: 50px;
+                i{
+                    font-weight: 300;
+                }
+            }
+            .search{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-radius: 5px;
+                background-color: #fff;
+                .searchInput{
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    background: white;
+                    padding: 10px 0px;
+                    
+                    font-size: 25px;
+                    .icon{
+                        color: #000;
+                        margin: 0px 8px;
+                    }
+
+                    input{
+                        border: none;
+                        outline: none;
+                        //width: 50vw;
+                    }
+                }
+
+                button{
+                    border: none;
+                    width: 120px;
+                    height: 50px;
+                    color: white;
+                    padding: 0px 10px;
+                    cursor: pointer;
+                    //border-radius: 0%;
+                    background-color: #0aca4a;
+                }
+                
+            }
+            .popular{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                button{
+                    color: white;
+                    background-color: transparent;
+                    border: 1px solid white;
+                    padding: 5px 10px;
+                    border-radius: 20px;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .right{
+            height: 100%;
+
+            img{
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+}
