@@ -31,5 +31,3 @@ app.listen(500, ()=>{
     console.log("server is running")
 })
 
-//GDvBfphRGSC9zEgm
-//mongodb+srv://ghulammujtaba1016:GDvBfphRGSC9zEgm@cluster0.yiecowc.mongodb.net/?retryWrites=true&w=majority
