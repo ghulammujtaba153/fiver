@@ -11,3 +11,11 @@ export const deleteUser = async(req, res)=>{
     res.status(200).send('your account deleted')
     
 }
+
+
+export const getUser = async(req, res)=>{
+    const user = await User.findById(req.params.id);
+    
+    res.status(200).send(user)
+    
+}

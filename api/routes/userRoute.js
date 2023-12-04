@@ -1,9 +1,9 @@
 import express from 'express'
-import { deleteUser } from '../controllers/userController.js'
+import { deleteUser, getUser } from '../controllers/userController.js'
 import { verifyToken } from '../middleware/jwt.js'
 
-const router=express.Router()
+const userRouter=express.Router()
 
-router.get('/:id', verifyToken, deleteUser)
-
-export default router
+userRouter.delete('/:id', verifyToken, deleteUser)
+userRouter.get("/:id", getUser)
+export default userRouter

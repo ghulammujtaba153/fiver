@@ -3,6 +3,7 @@ import {connectToDatabase} from "./db/database.js";
 import cors from 'cors'
 import authrouter from './routes/authRouter.js'
 import Gigrouter from "./routes/gigRoute.js";
+import userRouter from "./routes/userRoute.js";
 
 const app=express()
 
@@ -15,7 +16,8 @@ app.use(express.json());
 
 
 app.use('/api/auth', authrouter)
-app.use('/api/gig', Gigrouter)
+app.use('/api/gigs', Gigrouter)
+app.use('/api/user', userRouter)
 
 app.use((err, req, res, next)=>{
     const errorStatus = err.status || 500
