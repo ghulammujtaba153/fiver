@@ -4,6 +4,7 @@ import cors from 'cors'
 import authrouter from './routes/authRouter.js'
 import Gigrouter from "./routes/gigRoute.js";
 import userRouter from "./routes/userRoute.js";
+import reviewRouter from "./routes/reviewRoute.js";
 
 const app=express()
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use('/api/auth', authrouter)
 app.use('/api/gigs', Gigrouter)
 app.use('/api/user', userRouter)
+app.use('/api/review', reviewRouter)
 
 app.use((err, req, res, next)=>{
     const errorStatus = err.status || 500
