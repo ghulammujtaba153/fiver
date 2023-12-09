@@ -7,46 +7,70 @@ import {FiThumbsDown} from 'react-icons/fi'
 import {FiClock} from 'react-icons/fi'
 import {FiRepeat} from 'react-icons/fi'
 import {HiArrowNarrowRight} from 'react-icons/hi'
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import newRequest from "../../../utils/newRequest";
 
 const Gig = () => {
+  const {id} =useParams()
+
+  const { isLoading, error, data, refetch } = useQuery({
+    queryKey: ['gig'],
+    queryFn: () => newRequest.get(`/gigs/single/${id}`).then(
+        (res) => {return res.data;}
+        
+      ),
+  })
+  console.log(data)
+
+  const userId = data?.userId;
+
+  const {
+    isLoading: isLoadingUser,
+    error: errorUser,
+    data: dataUser,
+  } = useQuery({
+    queryKey: ["user"],
+    queryFn: () =>
+      newRequest.get(`/users/${userId}`).then((res) => {
+        return res.data;
+      }),
+    enabled: !!userId,
+  });
+
+
   return (
     <div className="gig">
-      <div className="container">
+      {isLoading ? 'loading' : error? "something went wrong" :<div className="container">
         <div className="left">
-          <span className="breadCrumbs">Fiver > GRAPHICS >DESIGN</span>
-          <h1>i will create ai image</h1>
+          <span className="breadCrumbs">Fiver {">"} GRAPHICS {">"}DESIGN</span>
+          <h1>{data.title}</h1>
           <div className="user">
             <img src="https://images.pexels.com/photos/1074535/pexels-photo-1074535.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
             <span>Ali</span>
+            {!isNaN(data.totalStars / data.starNumber) &&(
             <div className="stars">
               <FcRating />
-              <FcRating />
-              <FcRating />
-              <FcRating />
-              <FcRating />
-              <span>5</span>
+              
+              <span>
+                    {Math.round(data.totalStars / data.starNumber)}</span>
             </div>
+            )}
           </div>
           <Slider slideToShow={1} arrowsScroll={1} className='slider'>
-            <img
-              src="https://images.pexels.com/photos/1074535/pexels-photo-1074535.jpeg?auto=compress&cs=tinysrgb&w=1600"
-              alt=""
-            />
-            <img
-              src="https://images.pexels.com/photos/1462935/pexels-photo-1462935.jpeg?auto=compress&cs=tinysrgb&w=1600"
-              alt=""
-            />
-            <img
-              src="https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600"
-              alt=""
-            />
+            {data.images.map((img) => (
+                <img
+                key={img}
+                src={img}
+                alt=""
+              />
+            ))}
+            
+          
           </Slider>
           <h2>About This Gig</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Repudiandae, harum quas! Itaque architecto cum optio illum omnis
-            beatae eos eum. Modi labore adipisci voluptate tempore maiores
-            voluptas architecto recusandae exercitationem?
+            {data.desc}
           </p>
           <div className="seller">
             <h2>About The Seller</h2>
@@ -54,14 +78,13 @@ const Gig = () => {
               <img src="" alt="" />
               <div className="info">
                 <span>Ali</span>
-                <div className="stars">
-                  <FcRating />
-                  <FcRating />
-                  <FcRating />
-                  <FcRating />
-                  <FcRating />
-                  <span>5</span>
-                </div>
+                {!isNaN(data.totalStars / data.starNumber) &&(
+                  <div className="stars">
+                    <FcRating />
+                    <span>
+                          {Math.round(data.totalStars / data.starNumber)}</span>
+                  </div>
+                  )}
                 <button>Contact Me</button>
               </div>
             </div>
@@ -179,38 +202,30 @@ const Gig = () => {
         <div className="right">
           
           <div className="price">
-            <h3>1 AI generated image</h3>
-            <h2>$ 59.99</h2>
+            <h3>{data.shortTitle}</h3>
+            <h2>$ {data.price}</h2>
           </div>
-          <p>I will create a unique quality ai generated image based on a description that you give me</p>
+          <p>{data.shortDesc}</p>
           <div className="details">
             <div className="title">
               <div className="t-left">
                 <FiClock/>
-                <span>2 Days Delivery</span>
+                <span>{data.deliveryDate} Days Delivery</span>
               </div>
               <div className="t-left">
                 <FiRepeat/>
-                <span>3 revisions</span>
+                <span>{data.revisionNumber} revisions</span>
               </div>
             </div>
             <div className="features">
-              <div className="item">
-                <HiArrowNarrowRight/>
-                <span>Prompt writing</span>
-              </div>
-              <div className="item">
-                <HiArrowNarrowRight/>
-                <span>Prompt writing</span>
-              </div>
-              <div className="item">
-                <HiArrowNarrowRight/>
-                <span>Prompt writing</span>
-              </div>
-              <div className="item">
-                <HiArrowNarrowRight/>
-                <span>Prompt writing</span>
-              </div>
+              {data.features.map((feature)=>(
+                <div className="item" key={feature}>
+                  <HiArrowNarrowRight/>
+                  <span>{feature}</span>
+                </div>
+              ))}
+              
+    
             </div>
             <div>
 
@@ -219,7 +234,7 @@ const Gig = () => {
           <button>Continue</button>
           
         </div>
-      </div>
+      </div>}
     </div>
   );
 };
