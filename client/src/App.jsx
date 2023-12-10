@@ -6,7 +6,7 @@ import Navbar from './components/home/Navbar';
 import Gig from './pages/gig/Gig';
 import Gigs from './pages/gigs/Gigs';
 import Home from './pages/home/Home'
-import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Outlet, RouterProvider, createBrowserRouter, useNavigate } from 'react-router-dom';
 import MyGigs from './pages/myGigs/MyGigs';
 import Orders from './pages/orders/Orders';
 import Messages from './pages/messages/Messages';
@@ -23,6 +23,7 @@ import {
 
 
 function App() {
+  
   const queryClient = new QueryClient()
   const Layout=()=>{
     return (

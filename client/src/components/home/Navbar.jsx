@@ -2,8 +2,13 @@ import React, { useEffect, useState } from 'react'
 import './navbar.scss'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import newRequest from '../../../utils/newRequest';
+import SpeechRecognitionComponent from '../speechrecognition/SpeechRecognition';
+
+
 
 function Navbar() {
+  
+
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -43,6 +48,9 @@ function Navbar() {
             <span className="text">fiverr</span>
           </Link>
           <span className="dot">.</span>
+        </div>
+        <div>
+          <SpeechRecognitionComponent/>
         </div>
         <div className="links">
           <span>Fiverr Business</span>

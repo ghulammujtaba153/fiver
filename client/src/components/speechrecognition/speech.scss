@@ -1,0 +1,13 @@
+.speech{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button {
+        height: 50px;
+        background-color: white !important;
+        color: #1dbf73 !important;
+        border: 1px solid #1dbf73 !important;
+        cursor: pointer;
+    }
+}
