@@ -2,6 +2,7 @@ import Gig from './../models/gig-model.js';
 import createError from '../utils/createError.js';
 
 export const createGig = async(req, res, next)=>{
+  console.log("gig")
     if(!req.isSeller) return next(createError(403, 'Only sellers can create a gig'))
     const newGig=new Gig({
         userId: req.userId,
@@ -40,8 +41,20 @@ export const getGig = async(req, res, next)=>{
 };
 
 
+export const getMyGigs = async(req, res, next)=>{
+  try {
+    const gig = await Gig.find({ userId: req.params.id });
+      
+      res.status(200).json(gig)
+  } catch (error) {
+      next(error)
+  }
+};
+
+
 export const getGigs = async(req, res, next)=>{
     const q = req.query;
+    console.log(q)
   const filters = {
     ...(q.userId && { userId: q.userId }),
     ...(q.category && { category: q.category }),

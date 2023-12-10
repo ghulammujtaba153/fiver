@@ -20,7 +20,7 @@ const Gigs = () => {
             
           ),
       })
-      console.log(data)
+      
 
       
     
