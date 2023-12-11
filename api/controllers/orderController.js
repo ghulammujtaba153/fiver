@@ -2,16 +2,17 @@ import Order from '../models/order-model.js'
 import Gig from '../models/gig-model.js'
 
 export const createOrder = async (req, res, next) => {
+  
     try {
         const gig = await Gig.findById(req.params.gigId);
-
+        console.log(gig)
       const order = new Order({
         gigId: gig._id,
         img: gig.cover,
         title: gig.title,
-        buyerId: req.userId,
-        sellerId: gig.userId,
         price: gig.price,
+        sellerId: gig.userId,
+        buyerId: req.userId,
         payment_intent: "temporary",
       })
       await order.save()
@@ -25,13 +26,13 @@ export const createOrder = async (req, res, next) => {
 
 export const getOrders = async (req, res, next) => {
     try {
-      console.log("order is coming")
+      
       const orders = await Order.find({
         ...(req.isSeller ? { sellerId: req.userId } : { buyerId: req.userId }),
-        isCompleted: true,
+        isCompleted: false,
       });
   
-      res.status(200).send("successfull");
+      res.status(200).send(orders);
     } catch (err) {
       next(err);
     }

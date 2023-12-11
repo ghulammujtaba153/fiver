@@ -7,6 +7,8 @@ import userRouter from "./routes/userRoute.js";
 import reviewRouter from "./routes/reviewRoute.js";
 import orderRouter from "./routes/orderRoute.js";
 import cookieParser from "cookie-parser";
+import conversationRoute from "./routes/conversationRoute.js";
+import messageRoute from "./routes/messageRoute.js";
 
 const app=express()
 
@@ -23,6 +25,8 @@ app.use('/api/gigs', Gigrouter)
 app.use('/api/user', userRouter)
 app.use('/api/review', reviewRouter)
 app.use('/api/orders', orderRouter)
+app.use("/api/conversations", conversationRoute);
+app.use("/api/messages", messageRoute);
 
 app.use((err, req, res, next)=>{
     const errorStatus = err.status || 500

@@ -15,6 +15,7 @@ const Orders = () => {
             return res.data;
           }),
       });
+      console.log(data)
       
 
 

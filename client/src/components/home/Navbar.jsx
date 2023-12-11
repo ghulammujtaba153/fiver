@@ -50,7 +50,7 @@ function Navbar() {
           <span className="dot">.</span>
         </div>
         <div>
-          <SpeechRecognitionComponent/>
+          {/* <SpeechRecognitionComponent/> */}
         </div>
         <div className="links">
           <span>Fiverr Business</span>
