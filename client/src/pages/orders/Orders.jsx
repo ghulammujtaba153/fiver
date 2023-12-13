@@ -3,10 +3,11 @@ import './orders.scss'
 import { FcContacts } from "react-icons/fc";
 import { useQuery } from '@tanstack/react-query';
 import newRequest from '../../../utils/newRequest';
+import { useAuth } from '../../context/authContext';
 
 const Orders = () => {
-
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const { user : currentUser } = useAuth();
+    //const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     
     const { isLoading, error, data } = useQuery({
         queryKey: ["orders"],

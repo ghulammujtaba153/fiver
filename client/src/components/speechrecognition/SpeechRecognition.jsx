@@ -5,7 +5,7 @@ import "./speech.scss"
 function SpeechRecognitionComponent() {
   const [recognition, setRecognition] = useState(null);
   const [listening, setListening] = useState(false);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -36,16 +36,23 @@ function SpeechRecognitionComponent() {
         } else if (command.includes("register")) {
           navigate('/register');
         } else if (command.includes("gigs")) {
-            navigate('/gigs');
-          } else if (command.includes("my gigs") || command.includes("mygigs")) {
-            navigate('/mygigs');
-          } else if (command.includes("orders")) {
-            navigate('/orders');
-          } else if (command.includes("messages")) {
-            navigate('/messages');
-          } else if (command.includes("add new gig")) {
-            navigate('/add');
-          }
+          navigate('/gigs');
+        } else if (command.includes("my gigs") || command.includes("mygigs")) {
+          navigate('/mygigs');
+        } else if (command.includes("orders")) {
+          navigate('/orders');
+        } else if (command.includes("messages")) {
+          navigate('/messages');
+        } else if (command.includes("add new gig")) {
+          navigate('/add');
+        }
+      }
+
+      // Handle scroll commands
+      if (command.includes("scroll up")) {
+        window.scrollBy(0, -window.innerHeight * 0.3); 
+      } else if (command.includes("scroll down")) {
+        window.scrollBy(0, window.innerHeight * 0.3); 
       }
     };
 

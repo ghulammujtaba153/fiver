@@ -19,10 +19,14 @@ import {
   QueryClientProvider,
   useQuery,
 } from '@tanstack/react-query'
-
+import alanBtn from '@alan-ai/alan-sdk-web';
+import { useEffect } from 'react';
 
 
 function App() {
+  
+
+  
   
   const queryClient = new QueryClient()
   const Layout=()=>{

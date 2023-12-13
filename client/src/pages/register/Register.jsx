@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import "./Register.scss";
 import newRequest from "../../../utils/newRequest";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
 
 
 function Register() {
   const [error, setError] = useState(null);
+  const { login } = useAuth();
   const [loading, setLoading] = useState(false)
   const [user, setUser] = useState({
     username: "",
@@ -67,6 +69,7 @@ function Register() {
         password: user.password
       }
       const res = await newRequest.post("/auth/login", login);
+      login(res.data)
       localStorage.setItem("currentUser", JSON.stringify(res.data));
       
       navigate("/")

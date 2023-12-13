@@ -3,14 +3,15 @@ import './navbar.scss'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import newRequest from '../../../utils/newRequest';
 import SpeechRecognitionComponent from '../speechrecognition/SpeechRecognition';
+import AlanAiComponent from '../alanai/Alanai';
+import { useAuth } from '../../context/authContext';
 
 
 
 function Navbar() {
-  
-
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
+  const { user : currentUser, logout, login } = useAuth();
 
   const { pathname } = useLocation();
 
@@ -25,7 +26,12 @@ function Navbar() {
     };
   }, []);
 
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  if(JSON.parse(localStorage.getItem("currentUser"))){
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+    login(user)
+  }
+
+  
 
   const navigate = useNavigate();
 
@@ -33,6 +39,7 @@ function Navbar() {
     try {
       console.log('ssss')
       await newRequest.post("/auth/logout");
+      logout()
       localStorage.setItem("currentUser", null);
       navigate("/");
     } catch (err) {
@@ -52,6 +59,9 @@ function Navbar() {
         <div>
           {/* <SpeechRecognitionComponent/> */}
         </div>
+        <div>
+          <AlanAiComponent/>
+        </div>
         <div className="links">
           <span>Fiverr Business</span>
           <span>Explore</span>
@@ -59,7 +69,7 @@ function Navbar() {
           {!currentUser?.isSeller && <span>Become a Seller</span>}
           {currentUser ? (
             <div className="user" onClick={() => setOpen(!open)}>
-              <img src={currentUser.img || "/img/noavatar.jpg"} alt="" />
+              <img src={currentUser.img} alt="" />
               <span>{currentUser?.username}</span>
               {open && (
                 <div className="options">

@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import "./Login.scss";
 import { useNavigate } from "react-router-dom";
 import newRequest from "../../../utils/newRequest";
+import { useAuth } from "../../context/authContext";
+
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const { login } = useAuth();
 
   const navigate = useNavigate();
 
@@ -14,6 +17,8 @@ function Login() {
     e.preventDefault();
     try {
       const res = await newRequest.post("/auth/login", { username, password });
+      login(res.data);
+      console.log(res.data)
       localStorage.setItem("currentUser", JSON.stringify(res.data));
       navigate("/")
     } catch (err) {

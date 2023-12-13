@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom'
 import {RiDeleteBin5Fill  } from "react-icons/ri";
 import { useMutation, useQuery } from '@tanstack/react-query';
 import newRequest from '../../../utils/newRequest';
+import { useAuth } from '../../context/authContext';
 
 const MyGigs = () => {
-    const currentUser= JSON.parse(localStorage.getItem("currentUser"))
+  const { user : currentUser } = useAuth();
+    //const currentUser= JSON.parse(localStorage.getItem("currentUser"))
     
     const { isLoading, error, data, refetch } = useQuery({
         queryKey: ['mygigs'],
