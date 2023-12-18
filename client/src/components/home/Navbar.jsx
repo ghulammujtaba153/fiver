@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import './navbar.scss'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import newRequest from '../../../utils/newRequest';
-import SpeechRecognitionComponent from '../speechrecognition/SpeechRecognition';
-import AlanAiComponent from '../alanai/Alanai';
+// import SpeechRecognitionComponent from '../speechrecognition/SpeechRecognition';
+// import AlanAiComponent from '../alanai/Alanai';
 import { useAuth } from '../../context/authContext';
 
 
@@ -26,10 +26,12 @@ function Navbar() {
     };
   }, []);
 
-  if(JSON.parse(localStorage.getItem("currentUser"))){
-    const user = JSON.parse(localStorage.getItem("currentUser"));
-    login(user)
-  }
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (storedUser && !currentUser) { // Check if currentUser is not already set
+      login(storedUser);
+    }
+  }, [currentUser, login]);
 
   
 
@@ -60,7 +62,7 @@ function Navbar() {
           {/* <SpeechRecognitionComponent/> */}
         </div>
         <div>
-          <AlanAiComponent/>
+          {/* <AlanAiComponent/> */}
         </div>
         <div className="links">
           <span>Fiverr Business</span>
