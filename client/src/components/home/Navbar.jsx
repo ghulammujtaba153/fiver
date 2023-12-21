@@ -3,7 +3,7 @@ import './navbar.scss'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import newRequest from '../../../utils/newRequest';
 // import SpeechRecognitionComponent from '../speechrecognition/SpeechRecognition';
-// import AlanAiComponent from '../alanai/Alanai';
+import AlanAiComponent from '../alanai/Alanai';
 import { useAuth } from '../../context/authContext';
 
 
@@ -58,11 +58,9 @@ function Navbar() {
           </Link>
           <span className="dot">.</span>
         </div>
-        <div>
-          {/* <SpeechRecognitionComponent/> */}
-        </div>
-        <div>
-          {/* <AlanAiComponent/> */}
+        
+        <div className="alan-ai-container">
+          <AlanAiComponent/>
         </div>
         <div className="links">
           <span>Fiverr Business</span>

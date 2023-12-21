@@ -21,14 +21,12 @@ const AlanAiComponent = () => {
             break;
           case 'go to register':
           case 'navigate to register':
-            navigate('/register');
+            navigate('/register'); 
             break;
           case 'go to gigs':
-            navigate('/gigs');
+            navigate('/gigs?cat=design');
             break;
-          case 'go to my gigs':
-          case 'navigate to my gigs':
-          case 'go to mygigs':
+          
           case 'navigate to mygigs':
             navigate('/mygigs');
             break;
